@@ -1,42 +1,14 @@
 provider "aws" {
-  region = "us-east-1"
-  access_key = "AKIA3PK6EPGUYXOOT777"
-  secret_key = "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"
+  region     = "us-east-1"
+  access_key = "AKIA3PK6EPGU3265YU4R"
+  secret_key = "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"
 }
 
-resource "aws_instance" "ec2" {
-    ami = "ami-0b0dcb5067f052a63"
-    instance_type = "t2.micro"
-    key_name = "jt1"
-    security_groups = ["rtp03-sg"]
-}
-
-resource "aws_security_group" "rtp03-sg" {
-    name = "rtp03-sg"
-
-    ingress {
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-
-    }
-    ingress {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-
-    }
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    tags = {
-        Name = "ssh-sg"
-
-    }
+resource "aws_instance" "web" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
+  key_name      = "jt1"
+  tags = {
+    Name = "terraec2"
+  }
 }
