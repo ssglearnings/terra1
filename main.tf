@@ -1,46 +1,14 @@
 provider "aws" {
   region     = "us-east-1"
-  
-  
+  access_key = "AKIA3PK6EPGU3265YU4R"
+  secret_key = "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"
 }
 
-#Create a new EC2 launch configuration
-resource "aws_instance" "ec2_public" {
-  ami                         = var.ami_id
-  instance_type               = var.instance_type
-  key_name                    = var.key_name
-  security_groups             = ["${aws_security_group.ssh-security-group.id}"]
-  subnet_id                   = aws_subnet.public-subnet-1.id
-  associate_public_ip_address = true
-  #user_data                   = "${data.template_file.provision.rendered}"
-  #iam_instance_profile = "${aws_iam_instance_profile.some_profile.id}"
-  lifecycle {
-    create_before_destroy = true
-  }
+resource "aws_instance" "web" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
+  key_name      = "jt1"
   tags = {
-    "Name" = "EC2-PUBLIC"
+    Name = "terraec2"
   }
-  
- 
 }
-#Create a new EC2 launch configuration
-resource "aws_instance" "ec2_private" {
-  ami                         = var.ami_id
-  instance_type               = var.instance_type
-  key_name                    = var.key_name
-  security_groups             = ["${aws_security_group.webserver-security-group.id}"]
-  subnet_id                   = aws_subnet.private-subnet-1.id
-  associate_public_ip_address = false
-  #user_data                   = "${data.template_file.provision.rendered}"
-  #iam_instance_profile = "${aws_iam_instance_profile.some_profile.id}"
-  lifecycle {
-    create_before_destroy = true
-  }
-  tags = {
-    "Name" = "EC2-PRIVATE"
-  }
- 
-}
-################################
- 
-
