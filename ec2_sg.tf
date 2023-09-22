@@ -9,6 +9,6 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   key_name      = "jt1"
   tags = {
-    Name = "terraec2"
+    Name = "terraec3"
   }
 }
